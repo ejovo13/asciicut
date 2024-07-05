@@ -52,10 +52,16 @@ def summarize_casts(
 
     table = Table(title=title)
     table.add_column("File")
+    table.add_column("Start time")
     table.add_column("Duration (s)")
     table.add_column("Events")
 
     for file, cast in zip(filenames, casts):
-        table.add_row(file, str(cast.duration()), str(cast.n_events()))
+        table.add_row(
+            file,
+            f"{cast.start_time():0.5}",
+            f"{cast.duration():0.5}",
+            str(cast.n_events()),
+        )
 
     return table

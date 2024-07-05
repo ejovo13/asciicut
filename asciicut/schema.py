@@ -59,13 +59,17 @@ class AsciiCast:
         """The duration of this ascii cast."""
         return self.events[-1].timestamp
 
+    def start_time(self) -> float:
+        """Retrieve the first timestamp."""
+        return self.events[0].timestamp
+
     def n_events(self) -> int:
         """The number of unique events in this cast."""
         return len(self.events)
 
     def shave_time_beginning(self, time_s: float) -> AsciiCast:
         """Return a new AsciiCast with the first `time_s` dropped."""
-        new_events = [e.add_time(time_s) for e in self.events if e.timestamp >= time_s]
+        new_events = [e.add_time(-time_s) for e in self.events if e.timestamp >= time_s]
         return AsciiCast(header=self.header, events=new_events)
 
     def to_lines(self) -> list[str]:
