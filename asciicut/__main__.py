@@ -4,7 +4,11 @@ import typer
 from .utils import find_casts
 from .schema import AsciiCast
 
-app = typer.Typer(name="Asciicut", short_help="Slice and dice .cast files")
+app = typer.Typer(
+    name="Asciicut",
+    short_help="Slice and dice .cast files",
+    no_args_is_help=True,
+)
 
 
 @app.command()
